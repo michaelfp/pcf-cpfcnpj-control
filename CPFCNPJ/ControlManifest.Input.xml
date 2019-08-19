@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="Michael" constructor="CPFCNPJ" version="0.0.1" display-name-key="Controle para informar CPF ou CNPJ" description-key="Controle que realiza a validação de CPF e CNPJ" control-type="standard">
+    <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
+    <property name="CFPCNPJValue" display-name-key="CNPF/CNPJ" description-key="Guarda o Valor do CPF/CNPJ" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="TipoControle" display-name-key="Tipo do campo a ser utilizado" description-key="Sim para 'CPF e Não para 'CNPJ'" of-type="TwoOptions" usage="bound" required="false" />
+    <property name="Formatado" display-name-key="Formatação" description-key="Informe se deseja obter o CPF/CNPJ formatado" of-type="TwoOptions" usage="bound" required="false" />
+    
+    <!-- 
+      Property node's of-type attribute can be of-type-group attribute. 
+      Example:
+      <type-group name="numbers">
+        <type>Whole.None</type>
+        <type>Currency</type>
+        <type>FP</type>
+        <type>Decimal</type>
+      </type-group>
+      <property name="sampleProperty" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type-group="numbers" usage="bound" required="true" />
+    -->
+    <resources>
+      <css path="css/style.css" order="1" />
+      <code path="index.ts" order="2"/>
+      <!-- UNCOMMENT TO ADD MORE RESOURCES
+      <css path="css/CPFCNPJ.css" order="1" />
+      <resx path="strings/CPFCNPJ.1033.resx" version="1.0.0" />
+      -->
+    </resources>
+    <!-- UNCOMMENT TO ENABLE THE SPECIFIED API
+    <feature-usage>
+      <uses-feature name="Device.captureAudio" required="true" />
+      <uses-feature name="Device.captureImage" required="true" />
+      <uses-feature name="Device.captureVideo" required="true" />
+      <uses-feature name="Device.getBarcodeValue" required="true" />
+      <uses-feature name="Device.getCurrentPosition" required="true" />
+      <uses-feature name="Device.pickFile" required="true" />
+      <uses-feature name="Utility" required="true" />
+      <uses-feature name="WebAPI" required="true" />
+    </feature-usage>
+    -->
+  </control>
+</manifest>
