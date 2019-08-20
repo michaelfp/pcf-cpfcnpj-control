@@ -6,6 +6,7 @@ import {CPFCNPJValidator, CPFCNPJType} from './CPFCNPJValidator';
 
 export class CPFCNPJ implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
+	_divControl:HTMLDivElement;
 	_inputControl: HTMLInputElement;
 	_notifyOutputChanged: () => void;
 	_container: HTMLDivElement;
@@ -28,10 +29,23 @@ export class CPFCNPJ implements ComponentFramework.StandardControl<IInputs, IOut
 
 	}
 
-	renderControl(): void{
+	/**
+	 * Get UniqueId so as to avoid id conflict between multiple fields bind to same attribute
+	 * @param context The "Input Properties" containing the parameters, control metadata and interface functions.
+	 * @param passInString input string as suffix
+	 * @param randomInt random integer
+	 * @returns a string of uniqueId includes attribute logicalname + passIn specialized string + random Integer
+	*/
+	private createUniqueId(context: ComponentFramework.Context<IInputs>, passInString: string): string {
+		let randomInt = Math.floor(Math.floor(100) * Math.random());
+		return context.parameters!.CFPCNPJValue.attributes!.LogicalName + "-" + passInString + randomInt;
+	}
 
+	renderControl(container:HTMLDivElement): void{
+
+		this._container = document.createElement("div");
 		this._inputControl = document.createElement("input");
-		this._inputControl.setAttribute("id","cpfcnpj_control");
+		this._inputControl.setAttribute("id",this.createUniqueId(this._context,"cpfcnpj_control"));
 		this._inputControl.setAttribute("value",this._context.parameters.CFPCNPJValue.formatted ? this._context.parameters.CFPCNPJValue.formatted : "");
 		this._inputControl.addEventListener("input",this._refreshData);
 		this._spanControl = document.createElement("span");
@@ -39,14 +53,15 @@ export class CPFCNPJ implements ComponentFramework.StandardControl<IInputs, IOut
 		this._iconControl.classList.add("fas");
 		
 		this._spanControl.appendChild(this._iconControl);
+
 		this._container.appendChild(this._inputControl);
 		this._container.appendChild(this._spanControl);
+		container.appendChild(this._container);
 
 	}
 
 	refreshData(evt: Event):void{
 		this._CPF_CNPJ = this._inputControl.value;
-
 		
 		if(this._CPF_CNPJ === "" || this._CPF_CNPJ === undefined)
 		{
@@ -59,7 +74,7 @@ export class CPFCNPJ implements ComponentFramework.StandardControl<IInputs, IOut
 		else
 			this.validateField();
 		
-		
+			
 		this._notifyOutputChanged();
 	}
 	
@@ -78,7 +93,8 @@ export class CPFCNPJ implements ComponentFramework.StandardControl<IInputs, IOut
 				if(this._campoFormatado)
 				{
 					this._CPF_CNPJ = this._validador.formataCPF(this._CPF_CNPJ);
-					this._inputControl.setAttribute("value",this._CPF_CNPJ);
+					//this._inputControl.setAttribute("value",this._CPF_CNPJ);
+					this._inputControl.value = this._CPF_CNPJ;
 				}
 
 				this._inputControl.setAttribute("value",this._CPF_CNPJ);
@@ -107,7 +123,7 @@ export class CPFCNPJ implements ComponentFramework.StandardControl<IInputs, IOut
 				if(this._campoFormatado)
 				{
 					this._CPF_CNPJ = this._validador.formataCNPJ(this._CPF_CNPJ);
-					this._inputControl.setAttribute("value",this._CPF_CNPJ);
+					this._inputControl.value = this._CPF_CNPJ;
 				}
 			}
 			else{
@@ -136,19 +152,20 @@ export class CPFCNPJ implements ComponentFramework.StandardControl<IInputs, IOut
 	{
 		// Add control initialization code
 
-		this._container = container;
 		this._container = document.createElement("div");
 		this._context = context;
 		this._refreshData = this.refreshData.bind(this);
 		this._notifyOutputChanged = notifyOutputChanged;
-		this._type = context.parameters.TipoControle.raw ? CPFCNPJType.CPF : CPFCNPJType.CNPJ;
-		this._campoFormatado = context.parameters.Formatado.raw;
-		console.log(context.parameters.Formatado.raw);
-		console.log(context.parameters.TipoControle.raw);
+		this._CPF_CNPJ = context.parameters.CFPCNPJValue.formatted? context.parameters.CFPCNPJValue.formatted : "";
+		this._type = context.parameters.TipoControle.formatted === "CPF" ? CPFCNPJType.CPF : CPFCNPJType.CNPJ;
+		this._campoFormatado = context.parameters.Formatado.formatted === "1" ? true : false;
+		console.log(this._campoFormatado);
+		console.log(this._type);
 		// console.log(this._type);
-		container.appendChild(this._container);
-		this.renderControl();
-		this.validateField();
+		
+		this.renderControl(container);
+		if(this._CPF_CNPJ !== "" && this._CPF_CNPJ !== undefined)
+			this.validateField();
 
 	}
 
@@ -160,12 +177,12 @@ export class CPFCNPJ implements ComponentFramework.StandardControl<IInputs, IOut
 	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
 		// Add code to update control view
-		this._CPF_CNPJ = context.parameters.CFPCNPJValue.raw;
-		this._type = context.parameters.TipoControle.raw ? CPFCNPJType.CPF : CPFCNPJType.CNPJ;
-		this._campoFormatado = context.parameters.Formatado.raw;
+		this._CPF_CNPJ = context.parameters.CFPCNPJValue.raw ? context.parameters.CFPCNPJValue.raw  : "";
+		this._type = context.parameters.TipoControle.raw === "CPF" ? CPFCNPJType.CPF : CPFCNPJType.CNPJ;
+		this._campoFormatado =  context.parameters.Formatado.raw === "1" ? true : false;
 		this._context = context;
-		this._inputControl.setAttribute("value",context.parameters.CFPCNPJValue.formatted ? context.parameters.CFPCNPJValue.formatted : "");
-		this.validateField();
+		
+		//this.validateField();
 		
 	}
 

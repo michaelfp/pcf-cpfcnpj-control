@@ -19,6 +19,10 @@ export class CPFCNPJValidator{
         return data.split('').every((currentChar) => { currentChar === data[0]});
     }
 
+    public RemoveNondigits(field:string):string{
+        return field.replace(this._regexNondigit,'');
+    }
+
     public validaCPF(_cpf:string):boolean{
 
         let cpfNumerico = _cpf.replace(this._regexNondigit,'');
@@ -93,7 +97,6 @@ export class CPFCNPJValidator{
                         return r > 9 ? 0 : r
                 }
 
-            debugger;
             let firstDigit = calc(t).toString();
             let secondDigt = calc(t+1).toString();
             let CNPJDigitos = '';
