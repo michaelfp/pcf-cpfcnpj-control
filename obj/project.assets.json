@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.6.2": {
-      "Microsoft.PowerApps.MSBuild.Pcf/0.3.4": {
+      "Microsoft.PowerApps.MSBuild.Pcf/1.3.1": {
         "type": "package",
         "build": {
           "build/Microsoft.PowerApps.MSBuild.Pcf.props": {},
@@ -11,7 +11,7 @@
       }
     },
     ".NETFramework,Version=v4.6.2/win": {
-      "Microsoft.PowerApps.MSBuild.Pcf/0.3.4": {
+      "Microsoft.PowerApps.MSBuild.Pcf/1.3.1": {
         "type": "package",
         "build": {
           "build/Microsoft.PowerApps.MSBuild.Pcf.props": {},
@@ -20,7 +20,7 @@
       }
     },
     ".NETFramework,Version=v4.6.2/win-x64": {
-      "Microsoft.PowerApps.MSBuild.Pcf/0.3.4": {
+      "Microsoft.PowerApps.MSBuild.Pcf/1.3.1": {
         "type": "package",
         "build": {
           "build/Microsoft.PowerApps.MSBuild.Pcf.props": {},
@@ -29,7 +29,7 @@
       }
     },
     ".NETFramework,Version=v4.6.2/win-x86": {
-      "Microsoft.PowerApps.MSBuild.Pcf/0.3.4": {
+      "Microsoft.PowerApps.MSBuild.Pcf/1.3.1": {
         "type": "package",
         "build": {
           "build/Microsoft.PowerApps.MSBuild.Pcf.props": {},
@@ -39,10 +39,10 @@
     }
   },
   "libraries": {
-    "Microsoft.PowerApps.MSBuild.Pcf/0.3.4": {
-      "sha512": "HSwSnkCME8y3clFYfkFt9ultW9OOL7ym5JikaTuT8GDAE/Qr5F3qlyHyL6Gw0F8J0TyqpPfn635Q/LIzAhUwOA==",
+    "Microsoft.PowerApps.MSBuild.Pcf/1.3.1": {
+      "sha512": "DJ+vLM1E/b5xYG39LMOpTakcN8eYS7Ga1iZbA5oGMFkN9xrFRNcHk8S+t/xhu443gzPEni0Kw6dapA82bbswTQ==",
       "type": "package",
-      "path": "microsoft.powerapps.msbuild.pcf/0.3.4",
+      "path": "microsoft.powerapps.msbuild.pcf/1.3.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -50,14 +50,14 @@
         "LICENSE.txt",
         "build/Microsoft.PowerApps.MSBuild.Pcf.props",
         "build/Microsoft.PowerApps.MSBuild.Pcf.targets",
-        "microsoft.powerapps.msbuild.pcf.0.3.4.nupkg.sha512",
+        "microsoft.powerapps.msbuild.pcf.1.3.1.nupkg.sha512",
         "microsoft.powerapps.msbuild.pcf.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.6.2": [
-      "Microsoft.PowerApps.MSBuild.Pcf >= 0.*"
+      "Microsoft.PowerApps.MSBuild.Pcf >= 1.*"
     ]
   },
   "packageFolders": {
@@ -94,7 +94,7 @@
         "dependencies": {
           "Microsoft.PowerApps.MSBuild.Pcf": {
             "target": "Package",
-            "version": "[0.*, )"
+            "version": "[1.*, )"
           }
         }
       }
