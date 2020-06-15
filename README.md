@@ -1,4 +1,4 @@
-# Coponente para validação de CPF e CNPJ para Dynamics 365
+# Componente para validação de CPF e CNPJ para Dynamics 365
 Componente de PowerApps Framework de CPF & CNPJ para Dynamics 365. Realiza a validação e informa se está correto ou errado o valor informado do documento.
 
 ![atl-text](https://github.com/michaelfp/pcf-cpfcnpj-control/blob/master/example/pcf-cpfcnpj-control.gif)
